@@ -1,1 +1,15 @@
-spring.application.name=rest-with-spring-boot-and-java-erudio
+spring:
+  application: null
+  name: rest-with-spring-boot-and-java-erudio
+  datasource:
+    url: jdbc:mysql://localhost:3306/erudio_db?useSSL=false&serverTimezone=UTC
+    username: erudio_user
+    password: erudio_pass
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+    open-in-view: false
