@@ -13,3 +13,6 @@ spring:
     properties:
       hibernate:
     open-in-view: false
+logging:
+  level:
+  br.com.erudio: DEBUG
