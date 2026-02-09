@@ -1,18 +1,29 @@
-package br.com.erudio.data.dto;
+package br.com.erudio.data.dto.v2;
 
+import java.util.Date;
 import java.util.Objects;
 
-public class PersonDTO {
+public class PersonDTOV2 {
 
     private static final long serialVersionUID = 1L;
 
     private Long id;
     private String firstName;
     private String lastName;
+    private Date birthDay;
+
+    public Date getBirthDay() {
+        return birthDay;
+    }
+
+    public void setBirthDay(Date birthDay) {
+        this.birthDay = birthDay;
+    }
+
     private String address;
     private String gender;
 
-    public PersonDTO() {
+    public PersonDTOV2() {
     }
 
     public String getFirstName() {
@@ -57,12 +68,12 @@ public class PersonDTO {
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof PersonDTO person)) return false;
-        return Objects.equals(getId(), person.getId()) && Objects.equals(getFirstName(), person.getFirstName()) && Objects.equals(getLastName(), person.getLastName()) && Objects.equals(getAddress(), person.getAddress()) && Objects.equals(getGender(), person.getGender());
+        if (!(o instanceof PersonDTOV2 that)) return false;
+        return Objects.equals(getId(), that.getId()) && Objects.equals(getFirstName(), that.getFirstName()) && Objects.equals(getLastName(), that.getLastName()) && Objects.equals(getBirthDay(), that.getBirthDay()) && Objects.equals(getAddress(), that.getAddress()) && Objects.equals(getGender(), that.getGender());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getFirstName(), getLastName(), getAddress(), getGender());
+        return Objects.hash(getId(), getFirstName(), getLastName(), getBirthDay(), getAddress(), getGender());
     }
 }
