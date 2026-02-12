@@ -3,6 +3,7 @@ package br.com.erudio.controllers;
 import br.com.erudio.data.dto.v1.PersonDTO;
 import br.com.erudio.data.dto.v2.PersonDTOV2;
 import br.com.erudio.services.PersonServices;
+import com.fasterxml.jackson.annotation.JsonFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +32,10 @@ public class PersonController {
     public PersonDTO findById(@PathVariable Long id) {
         var person = service.findById(id);
         person.setBirthDay(new Date());
+        //person.setPhoneNumber("+ 55 (34) 98765-4321");
+        person.setPhoneNumber("");
+        person.setLastName(null);
+        person.setSensitiveData("Foo Bar");
 
         return person;
     }
