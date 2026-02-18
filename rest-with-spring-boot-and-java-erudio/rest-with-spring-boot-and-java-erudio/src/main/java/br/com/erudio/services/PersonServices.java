@@ -3,6 +3,7 @@ package br.com.erudio.services;
 import br.com.erudio.controllers.PersonController;
 import br.com.erudio.data.dto.v1.PersonDTO;
 import br.com.erudio.data.dto.v2.PersonDTOV2;
+import br.com.erudio.exception.RequiredObjectIsNullException;
 import br.com.erudio.exception.ResourceNotFoundException;
 import br.com.erudio.mapper.custom.PersonMapper;
 import br.com.erudio.model.Person;
@@ -48,6 +49,8 @@ public class PersonServices {
     }
 
     public PersonDTO create(PersonDTO person) {
+
+        if(person == null) throw new RequiredObjectIsNullException();
         logger.info("Creating one person!");
 
         var entity = parseObject(person, Person.class);
@@ -66,6 +69,9 @@ public class PersonServices {
     }
 
     public PersonDTO update(PersonDTO person) {
+
+        if(person == null) throw new RequiredObjectIsNullException();
+
         logger.info("Updating one person!");
         Person entity = repository.findById(person.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
@@ -81,7 +87,7 @@ public class PersonServices {
         return dto;
     }
 
-    public void Delete(Long id) {
+    public void delete(Long id) {
         logger.info("Deleting one person!");
 
         Person entity = repository.findById(id)

@@ -54,7 +54,7 @@ public class PersonController {
 
     @DeleteMapping (value = "/{id}")
     public ResponseEntity<?> Delete(@PathVariable Long id) {
-        service.Delete(id);
+        service.delete(id);
         return ResponseEntity.noContent().build();
     }
 
