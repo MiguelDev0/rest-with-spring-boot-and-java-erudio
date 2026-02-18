@@ -1,5 +1,6 @@
 package br.com.erudio.services;
 
+import br.com.erudio.controllers.PersonController;
 import br.com.erudio.data.dto.v1.PersonDTO;
 import br.com.erudio.data.dto.v2.PersonDTOV2;
 import br.com.erudio.exception.ResourceNotFoundException;
@@ -15,6 +16,8 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import static br.com.erudio.mapper.ObjectMapper.parseListObjects;
 import static br.com.erudio.mapper.ObjectMapper.parseObject;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Service
 public class PersonServices {
@@ -29,7 +32,10 @@ public class PersonServices {
     public List<PersonDTO> findAll() {
         logger.info("Finding all People!");
 
-        return parseListObjects(repository.findAll(), PersonDTO.class);
+        var persons = parseListObjects(repository.findAll(), PersonDTO.class);
+
+        persons.forEach(this::addHateoasLinks);
+        return persons;
     }
 
     public PersonDTO findById(Long id) {
@@ -37,8 +43,10 @@ public class PersonServices {
 
         var entity = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
+        var dto = parseObject(entity, PersonDTO.class);
 
-        return parseObject(entity, PersonDTO.class);
+        addHateoasLinks(dto);
+        return dto;
     }
 
     public PersonDTO create(PersonDTO person) {
@@ -46,7 +54,10 @@ public class PersonServices {
 
         var entity = parseObject(person, Person.class);
 
-        return parseObject(repository.save(entity), PersonDTO.class);
+        var dto = parseObject(repository.save(entity), PersonDTO.class);
+        addHateoasLinks(dto);
+
+        return dto;
     }
     public PersonDTOV2 createV2(PersonDTOV2 person) {
         logger.info("Creating one person V2!");
@@ -66,7 +77,10 @@ public class PersonServices {
         entity.setAddress(person.getAddress());
         entity.setGender(person.getGender());
 
-        return parseObject(repository.save(entity), PersonDTO.class);
+        var dto = parseObject(repository.save(entity), PersonDTO.class);
+
+        addHateoasLinks(dto);
+        return dto;
     }
 
     public void Delete(Long id) {
@@ -75,8 +89,18 @@ public class PersonServices {
         Person entity = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this ID"));
 
+        var dto = parseObject(entity, PersonDTO.class);
+
+        addHateoasLinks(dto);
         repository.delete(entity);
     }
 
+    private void addHateoasLinks(PersonDTO dto){
+        dto.add(linkTo(methodOn(PersonController.class).findById(dto.getId())).withSelfRel().withType("GET"));
+        dto.add(linkTo(methodOn(PersonController.class).findAll()).withRel("findAll").withType("GET"));
+        dto.add(linkTo(methodOn(PersonController.class).create(dto)).withRel("create").withType("POST"));
+        dto.add(linkTo(methodOn(PersonController.class).update(dto)).withSelfRel().withType("PUT"));
 
+        dto.add(linkTo(methodOn(PersonController.class).Delete(dto.getId())).withRel("delete").withType("DELETE"));
+    }
 }
