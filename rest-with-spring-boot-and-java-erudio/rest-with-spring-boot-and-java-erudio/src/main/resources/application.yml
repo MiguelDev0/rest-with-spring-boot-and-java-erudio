@@ -16,3 +16,5 @@ spring:
 logging:
   level:
     br.com.erudio: DEBUG
+spring-doc:
+  paths-to-match: /api/**/v1/**

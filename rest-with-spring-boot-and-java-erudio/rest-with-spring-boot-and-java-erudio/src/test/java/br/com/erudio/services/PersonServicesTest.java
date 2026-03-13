@@ -12,7 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
-import unitetests.mapper.mocks.MockPerson;
+import unittests.mapper.mocks.MockPerson;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,4 +1,4 @@
-package unitetests.mapper.mocks;
+package unittests.mapper.mocks;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,6 @@ import br.com.erudio.data.dto.v1.PersonDTO;
 import br.com.erudio.model.Person;
 
 public class MockPerson {
-
 
     public Person mockEntity() {
         return mockEntity(0);
