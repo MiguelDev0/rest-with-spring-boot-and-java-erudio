@@ -13,7 +13,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import unittests.mapper.mocks.MockPerson;
-
 import java.util.List;
 import java.util.Optional;
 

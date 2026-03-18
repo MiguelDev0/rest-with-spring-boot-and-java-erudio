@@ -1,4 +1,7 @@
+cors:
+  originPatterns: "http://localhost:8080, https://erudio.com.br"
 spring:
+  port: 8888
   application: null
   name: rest-with-spring-boot-and-java-erudio
   datasource:
