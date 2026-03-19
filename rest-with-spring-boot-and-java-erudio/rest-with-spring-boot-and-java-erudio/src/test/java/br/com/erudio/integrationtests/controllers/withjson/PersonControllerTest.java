@@ -142,6 +142,7 @@ class PersonControllerTest extends AbstractIntegrationTest {
         assertEquals("New York City - New York - USA", createdPerson.getAddress());
         assertEquals("Male", createdPerson.getGender());
     }
+
     @Test
     @Order(4)
     void findByIdWithWrongOrigin() throws JsonProcessingException {
