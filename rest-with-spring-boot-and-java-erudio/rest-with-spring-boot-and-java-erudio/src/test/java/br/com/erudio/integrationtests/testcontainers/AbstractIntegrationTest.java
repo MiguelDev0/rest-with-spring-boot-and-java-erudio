@@ -1,4 +1,4 @@
-package integrationtests.testcontainers;
+package br.com.erudio.integrationtests.testcontainers;
 
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;

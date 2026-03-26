@@ -2,14 +2,14 @@ package br.com.erudio.integrationtests.swagger;
 
 
 import br.com.erudio.configs.TestConfigs;
+import br.com.erudio.integrationtests.testcontainers.AbstractIntegrationTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import static io.restassured.RestAssured.given;
-import static junit.framework.TestCase.assertTrue;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-class SwaggerIntegrationTest extends integrationtests.testcontainers.AbstractIntegrationTest {
+class SwaggerIntegrationTest extends AbstractIntegrationTest {
 
     @Test
     void shouldDisplaySwaggerUIPage() {
