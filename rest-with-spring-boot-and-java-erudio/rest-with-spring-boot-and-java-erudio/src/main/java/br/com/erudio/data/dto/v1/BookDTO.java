@@ -2,9 +2,11 @@ package br.com.erudio.data.dto.v1;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.hateoas.RepresentationModel;
+import org.springframework.hateoas.server.core.Relation;
+
 import java.io.Serializable;
 import java.util.Date;
-
+@Relation(collectionRelation = "books")
 public class BookDTO extends RepresentationModel<BookDTO> implements Serializable {
     private Long id;
     private String author;
